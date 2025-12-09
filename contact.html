@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hubungi Admin - PMR</title>
+
+    <style>
+    :root {
+        --primary-red: #e63946;
+        --secondary-red: #d90429;
+        --white: #ffffff;
+        --text-dark: #212529;
+    }
+
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: var(--white);
+        color: var(--text-dark);
+        /* Padding disesuaikan dengan tinggi navbar agar konten tidak tertutup */
+        padding-top: 74px; 
+    }
+
+    /* === NAVBAR === */
+    nav {
+        width: 100%;
+        background: white;
+        padding: 12px 30px; /* Padding lebih besar untuk desktop/konsistensi */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        border-bottom: 1px solid #eee;
+        box-sizing: border-box;
+    }
+
+    .logo-area {
+        display: flex;
+        align-items: center;
+        gap: 10px; /* Gap disamakan */
+    }
+
+    .logo-area img {
+        height: 50px; /* Ukuran disamakan */
+        width: auto;
+        object-fit: contain;
+    }
+
+    .site-title {
+        font-size: 20px; /* Ukuran disamakan */
+        font-weight: bold;
+        white-space: nowrap;
+    }
+
+    nav ul {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        gap: 20px; /* Gap disamakan */
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        font-size: 16px;
+        color: #333;
+    }
+    
+    nav ul li a:hover {
+        color: var(--primary-red);
+    }
+
+    /* HAMBURGER */
+    .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px; /* Gap disamakan */
+        cursor: pointer;
+    }
+
+    .hamburger span {
+        width: 28px; /* Ukuran disamakan */
+        height: 3px; /* Ukuran disamakan */
+        background: #333;
+        border-radius: 5px;
+    }
+
+    /* === MOBILE NAV === */
+    @media (max-width: 768px) {
+        nav {
+            padding: 10px 20px; /* Padding lebih kecil di mobile */
+        }
+
+        .site-title {
+            font-size: 16px; 
+        }
+
+        .hamburger { 
+            display: flex; 
+        }
+
+        nav ul {
+            position: fixed;
+            top: 72px; /* Di bawah navbar */
+            right: -100%;
+            flex-direction: column;
+            background: var(--white);
+            width: 70%;
+            height: 100vh;
+            padding: 20px 0;
+            box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+            transition: 0.3s ease-in-out;
+            transform: translateX(100%); 
+        }
+        
+        nav ul li {
+            padding: 10px 30px;
+            width: 100%;
+        }
+
+        nav ul.active {
+            transform: translateX(0); /* Tampilkan di layar */
+        }
+        
+        .hero-title {
+            font-size: 2.5rem; /* Judul HERO lebih kecil di mobile */
+        }
+    }
+
+    /* === HERO === */
+    .hero {
+        background: linear-gradient(135deg, var(--primary-red), var(--secondary-red));
+        color: white;
+        /* Padding konsisten */
+        padding: 120px 20px 80px; 
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: 3rem; /* Ukuran disamakan */
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem; /* Ukuran disamakan */
+        opacity: 0.9;
+    }
+
+    /* === CONTACT CONTAINER === */
+    .contact-container {
+        max-width: 650px; /* Lebar disamakan dengan donasi-container */
+        margin: 50px auto; /* Margin disamakan */
+        padding: 2rem 20px; /* Padding konsisten */
+        background: var(--white);
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1); /* Shadow disamakan */
+        box-sizing: border-box;
+    }
+
+    .contact-title {
+        text-align: center;
+        color: var(--primary-red);
+        font-size: 1.8rem; /* Ukuran disamakan */
+        margin-bottom: 10px;
+    }
+
+    .contact-desc {
+        text-align: center;
+        margin-bottom: 30px; /* Jarak yang cukup sebelum tombol */
+    }
+
+    .wa-btn {
+        display: block;
+        width: 100%;
+        background: #25d366;
+        color: white;
+        padding: 15px;
+        font-size: 1.1rem;
+        text-align: center;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+    .wa-btn:hover {
+        background: #128c7e; /* Efek hover yang bagus */
+    }
+
+    /* === FLOAT WA === */
+    /* Dalam bagian STYLE di contact.html */
+
+/* Tambahkan styling baru untuk ikon di Contact Container */
+.wa-icon-container {
+    text-align: center; /* Pusatkan ikon */
+    margin-bottom: 20px;
+}
+
+.wa-icon-container img {
+    width: 60px; /* Ukuran ikon di atas judul */
+    height: 60px;
+}
+
+/* Pastikan gambar float WA muncul (sudah ada, tapi dikonfirmasi) */
+.wa-float img {
+    width: 30px;
+    height: 30px;
+}
+
+    /* === FOOTER (Diperbaiki agar rapi dan responsif) === */
+    .footer {
+        background: #2c3e50;
+        color: #ecf0f1;
+        padding: 40px 20px; /* Padding konsisten */
+        margin-top: 40px;
+    }
+
+    .footer-content {
+        max-width: 1200px; /* Lebar disamakan */
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between; /* Penting untuk meratakan kolom */
+    }
+
+    .footer-section {
+        flex: 1;
+        min-width: 250px; /* Minimum width disamakan */
+        padding-right: 20px;
+        margin-bottom: 20px;
+    }
+
+    .footer-section h3 {
+        color: #ffffff; 
+        margin-bottom: 15px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    
+    .footer-section p {
+        margin: 5px 0;
+    }
+
+    /* Style untuk tautan Instagram (terlihat di HTML Anda) */
+    .footer-section a {
+        display: inline-block;
+        color: #ffffff; 
+        text-decoration: none; 
+        padding: 8px 12px;
+        background-color: #34495e; 
+        border-radius: 4px;
+        font-size: 14px;
+        border: 1px solid #3498db; 
+        transition: background-color 0.3s;
+        margin-top: 5px; /* Jarak dari judul "Follow Us" */
+    }
+
+    .footer-section a:hover {
+        background-color: #3498db; 
+    }
+
+    /* Hak Cipta - Berada di baris baru dan di tengah */
+    .footer-bottom {
+        text-align: center;
+        margin-top: 30px; /* Jarak dari footer-content */
+        padding-top: 20px;
+        border-top: 1px solid #34495e;
+        font-size: 12px; /* Ukuran disamakan */
+    }
+    
+    /* === MOBILE FOOTER === */
+    @media (max-width: 768px) {
+        .footer-content {
+            flex-direction: column; /* Tumpuk kolom di mobile */
+        }
+        
+        .footer-section {
+            min-width: 100%;
+            padding-right: 0;
+            margin-bottom: 30px;
+        }
+
+        .contact-container {
+            margin: 30px 10px; /* Margin lebih kecil dan jarak dari tepi layar */
+            padding: 1.5rem;
+        }
+    }
+</style>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById("mobileMenu").classList.toggle("active");
+        }
+    </script>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo-area">
+        <img src="fotocisat.jpg">
+        <img src="fotopmr.jpg">
+        <span class="site-title">PALANG MERAH REMAJA</span>
+    </div>
+
+    <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <ul id="mobileMenu">
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="artikel.html">Artikel</a></li>
+        <li><a href="konsultasi.html">HelpLine</a></li>
+        <li><a href="donasi.html">Donasi</a></li>
+        <li><a href="contact.html">Kontak</a></li>
+    </ul>
+</nav>
+
+<section class="hero">
+    <h1 class="hero-title">Hubungi Admin PMR</h1>
+    <p class="hero-subtitle">Silakan hubungi kami melalui WhatsApp di bawah ini</p>
+</section>
+
+<div class="contact-container">
+    <div class="wa-icon-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Icon Besar">
+    </div>
+    
+    <h2 class="contact-title">Kontak WhatsApp</h2>
+    <p class="contact-desc">Jika Anda memiliki pertanyaan, laporan, atau membutuhkan bantuan, Anda dapat menghubungi kami melalui tombol di bawah:</p>
+
+    <a href="https://wa.me/6285697267363" class="wa-btn">Chat WhatsApp Admin</a>
+</div>
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>PMR Indonesia</h3>
+            <p>Wadah pembinaan dan pengembangan generasi muda dalam bidang kepalangmerahan.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Kontak</h3>
+            <p>Email: sherilindriw@gmail.com</p>
+            <p>Telepon: (+62) 85883594051</p>
+        </div>
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <a href="https://www.instagram.com/pmrsmkcibitung1?igsh=MmtoeGViMGFoYnpt">Instagram</a>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2025 PMR SMK CIBITUNG 1 PASTI BISA.</p>
+    </div>
+</footer>
+
+</body>
+</html>

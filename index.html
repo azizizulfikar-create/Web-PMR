@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMR - Palang Merah Remaja</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="index.css"> 
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-red: #e63946;
+            --secondary-red: #d90429;
+            --light-red: #ff9aa2;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --dark-gray: #343a40;
+            --text-dark: #212529;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+         /* NAVBAR */
+         nav {
+            width: 100%;
+            background: white;
+            padding: 12px 20px; /* Padding lebih kecil untuk mobile */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #eee;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            font-size: 16px;
+            color: #333;
+        }
+
+        nav ul li a:hover {
+            color: red;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-area img {
+            height: 40px; /* Ukuran logo lebih kecil */
+            width: auto;
+            object-fit: contain;
+            padding: 2px;
+        }
+
+
+        .site-title {
+            font-size: 18px; /* Ukuran judul lebih kecil */
+            font-weight: bold;
+        }
+
+
+        /* HAMBURGER */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background-color: var(--text-dark);
+            border-radius: 5px;
+        }
+
+        /* MOBILE MENU - Perbaikan Implementasi */
+        .nav-menu { /* Ini adalah <ul> tag */
+            display: flex; /* Default desktop */
+            list-style: none;
+            gap: 20px;
+        }
+
+
+        @media (max-width: 768px) { /* Menggunakan 768px sebagai breakpoint standar mobile */
+            
+            /* Sembunyikan Nav Menu di Desktop */
+            .nav-menu {
+                display: none; 
+                flex-direction: column; /* Ubah ke tumpukan */
+                position: fixed;
+                top: 65px; /* Tinggi navbar */
+                right: 0;
+                background: var(--white);
+                width: 70%;
+                height: 100vh;
+                padding: 2rem;
+                box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+                transition: transform 0.3s ease-in-out;
+                transform: translateX(100%); /* Mulai di luar layar */
+                gap: 1.5rem;
+            }
+
+            .nav-menu.active {
+                display: flex; /* Tampilkan saat aktif */
+                transform: translateX(0); /* Geser masuk */
+            }
+            
+            /* Tampilkan Hamburger */
+            .hamburger { 
+                display: flex; 
+                order: 3; /* Pastikan hamburger di kanan */
+            }
+
+            .site-title {
+                font-size: 16px; /* Lebih kecil lagi */
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--secondary-red) 100%);
+            color: var(--white);
+            padding: 100px 0 60px; /* Padding disesuaikan */
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 2.5rem; /* Ukuran lebih kecil untuk mobile */
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem; /* Ukuran lebih kecil untuk mobile */
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        /* Sections */
+        .section {
+            padding: 60px 0; /* Padding disesuaikan */
+        }
+        
+        .section-title {
+            font-size: 2rem; /* Ukuran disesuaikan */
+            margin-bottom: 2rem;
+        }
+        
+        /* === PERBAIKAN: TEXT JUSTIFY === */
+        /* Teks di About Section */
+        .about-text p {
+            text-align: justify;
+        }
+
+        /* Teks di Activity Cards */
+        .activity-content p {
+            text-align: justify;
+        }
+        
+        /* Teks di Footer (Deskripsi dan Info Kontak) */
+        .footer-section p, .footer-links li {
+            text-align: justify;
+        }
+        /* ============================== */
+        
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr; /* Tumpukan tunggal */
+            }
+            .about-image {
+                /* Gambar bisa diletakkan di atas atau di bawah teks */
+                order: -1; 
+            }
+        }
+
+        /* Activities Section */
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Ukuran kartu lebih fleksibel */
+            gap: 1.5rem;
+        }
+
+        .activity-card img {
+            width: 100%;
+            height: auto; /* Agar gambar proporsional */
+            max-height: 250px;
+            object-fit: cover;
+        }
+
+
+       /* Styling untuk Footer secara keseluruhan */
+.footer {
+    background-color: #2c3e50; /* Warna latar belakang gelap */
+    color: #ecf0f1; /* Warna teks terang */
+    /* Padding diubah, 40px vertikal, 20px horizontal (responsif) */
+    padding: 40px 20px; 
+    font-family: Arial, sans-serif; 
+}
+
+/* Bagian konten utama footer (PMR Indonesia, Kontak, Follow Us) */
+.footer-content {
+    display: flex; /* Menggunakan Flexbox untuk tata letak kolom */
+    justify-content: space-between; /* Memberi jarak antara kolom */
+    max-width: 1200px; /* Lebar maksimal konten */
+    margin: 0 auto; /* Pusatkan konten utama */
+    flex-wrap: wrap; /* PENTING: Agar kolom turun ke bawah di mobile */
+    /* Menambahkan padding horizontal di sini jika dibutuhkan, tapi margin auto sudah cukup */
+}
+
+/* Setiap kolom/bagian dalam footer */
+.footer-section {
+    flex: 1; /* Setiap bagian memiliki porsi yang sama */
+    padding-right: 20px;
+    min-width: 250px; /* Lebar minimum agar tidak terlalu rapat di desktop kecil */
+    margin-bottom: 20px; /* Jarak antar section di mobile */
+}
+
+.footer-section h3 {
+    color: #ffffff; /* Warna judul/header kolom */
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Styling untuk tautan media sosial */
+.social-links {
+    /* Mengatasi margin-bottom yang mungkin hilang saat wrapping */
+    margin-top: 10px;
+}
+
+.social-links a {
+    display: inline-block;
+    color: #ffffff; 
+    text-decoration: none; 
+    padding: 8px 12px;
+    margin-right: 10px;
+    background-color: #34495e; 
+    border-radius: 4px;
+    font-size: 14px;
+    border: 1px solid #3498db; 
+    transition: background-color 0.3s;
+}
+
+.social-links a:hover {
+    background-color: #3498db; 
+}
+
+/* Styling untuk garis pemisah dan teks hak cipta */
+.footer-bottom {
+    border-top: 1px solid #34495e; 
+    text-align: center; /* PENTING: Pusatkan teks hak cipta */
+    padding-top: 20px;
+    margin-top: 10px; /* Kurangi margin agar lebih dekat dengan garis */
+    font-size: 12px;
+}
+
+/* Khusus untuk kontak (agar list rapi) */
+.contact-info {
+    line-height: 1.8;
+}
+
+.footer-links {
+    list-style: none; /* Hapus bullet point */
+    padding: 0;
+    margin: 0;
+}
+.footer-links li {
+    margin: 5px 0;
+}
+
+/* === MOBILE MODE REVISI FOOTER === */
+@media (max-width: 768px) {
+    .footer {
+        padding: 30px 15px; /* Padding lebih kecil di mobile */
+    }
+
+    .footer-content {
+        flex-direction: column; /* Jadikan kolom vertikal di mobile */
+    }
+
+    .footer-section {
+        padding-right: 0;
+        min-width: 100%;
+        margin-bottom: 30px; /* Jarak antar section yang lebih besar di mobile */
+    }
+
+    /* Pastikan teks di footer-bottom tetap di tengah */
+    .footer-bottom {
+        text-align: center;
+    }
+}
+    </style>
+    <script>
+        function toggleMenu() {
+            // Menggunakan .nav-menu yang merupakan tag <ul>
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+    <div class="logo-area">
+        <img src="fotocisat.jpg" class="logo-sekolah" alt="fotocisat.jpg">
+        <img src="fotopmr.jpg" class="logo-pmr" alt="fotopmr.jpg">
+        <span class="site-title">PALANG MERAH REMAJA</span>
+    </div>
+
+    <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <ul id="navLinks" class="nav-menu"> 
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="artikel.html">Artikel</a></li>
+        <li><a href="konsultasi.html">HelpLine</a></li>
+        <li><a href="donasi.html">Donasi</a></li>
+        <li><a href="contact.html">Kontak</a></li>
+    </ul>
+</nav>
+
+
+    <section id="home" class="hero">
+        <div class="container hero-content fade-in">
+            <h1 class="hero-title"> PMR - Palang Merah Remaja </h1>
+            <p class="hero-subtitle">Bersatu untuk melakukan perubahan dan kesehatan</p>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h1>Dengan Kepedulian Kita Kuat Bersama</h1>
+<p class="slogan">Berkontribusi untuk perubahan melalui edukasi, saran, informasi</p>
+<p>
+    <strong>Palang Merah Remaja (PMR)</strong> adalah wadah pembinaan generasi muda yang fokus pada kegiatan kemanusiaan, kesehatan, dan pertolongan pertama di lingkungan sekolah. Kami berkomitmen untuk membentuk karakter remaja yang peduli, terampil, dan siap menjadi agen perubahan.
+</p>kesehatan, dan pertolongan pertama di lingkungan sekolah. Kami berkomitmen untuk membentuk karakter remaja yang peduli, terampil, dan siap menjadi agen perubahan.</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="activities" class="section" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">P(Palang)M(Merah)R(Remaja)</h2>
+            <div class="activities-grid"> 
+                <div class="activity-card fade-in">
+                    <img src="fotocisat2.jpg" alt="Tentang PMR"> 
+                    <div class="activity-content">
+                        <h3 class="activity-title">Tentang PMR</h3>
+                        <p>PMR adalah organisasi remaja di bawah Palang Merah Indonesia (PMI) yang bergerak di bidang kemanusiaan, kesehatan, dan pertolongan pertama. Tujuan PMR adalah membentuk remaja yang peduli, disiplin, dan siap membantu sesama.</p>
+                    </div>
+                </div>
+                
+                <div class="activity-card fade-in">
+                    <img src="fotocisat1.jpg" alt="Keunggulan PMR">
+                    <div class="activity-content">
+                        <h3 class="activity-title">Keunggulan/Manfaat</h3>
+                        <p>
+                           1. Belajar Pertolongan pertama<br>
+                           2. Melatih kedisiplinan & kepemimpinan<br>
+                           3. Menambah teman & pengalaman berorganisasi<br>
+                           4. Membangun empati & jiwa sosial
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>PMR Indonesia</h3>
+                    <p>Wadah pembinaan dan pengembangan generasi muda dalam bidang kepalangmerahan.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Kontak</h3>
+                    <ul class="footer-links">
+                        <li>Email: sherilindriw@gmail.com</li>
+                        <li>Telepon: (+62)85883594051</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/pmrsmkcibitung1?igsh=MmtoeGViMGFoYnpt" class="social-link">Instagram</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 PMR SMK CIBITUNG 1 PASTI BISA.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
