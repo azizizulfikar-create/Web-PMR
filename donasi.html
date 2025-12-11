@@ -93,40 +93,58 @@
     }
 
     /* MOBILE MENU - Posisikan ulang ul untuk mobile */
-   @media (max-width: 768px) { /* Menggunakan 768px sebagai breakpoint standar mobile */
-            
-            /* Sembunyikan Nav Menu di Desktop */
-            .nav-menu {
-                display: none; 
-                flex-direction: column; /* Ubah ke tumpukan */
-                position: fixed;
-                top: 65px; /* Tinggi navbar */
-                right: 0;
-                background: var(--white);
-                width: 70%;
-                height: 100vh;
-                padding: 2rem;
-                box-shadow: -4px 0 20px rgba(0,0,0,0.15);
-                transition: transform 0.3s ease-in-out;
-                transform: translateX(100%); /* Mulai di luar layar */
-                gap: 1.5rem;
-            }
-
-            .nav-menu.active {
-                display: flex; /* Tampilkan saat aktif */
-                transform: translateX(0); /* Geser masuk */
-            }
-            
-            /* Tampilkan Hamburger */
-            .hamburger { 
-                display: flex; 
-                order: 3; /* Pastikan hamburger di kanan */
-            }
-
-            .site-title {
-                font-size: 16px; /* Lebih kecil lagi */
-            }
+   @media (max-width: 768px) {
+        nav {
+            padding: 10px 20px; /* Padding lebih kecil di mobile */
         }
+        
+        .site-title {
+            font-size: 16px; /* Judul lebih kecil di mobile */
+        }
+
+       .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    /* TAMBAHKAN: Padding agar area klik lebih besar */
+    padding: 10px; 
+}
+
+        /* Navigasi disembunyikan dan diubah menjadi menu vertikal */
+        nav ul {
+            display: none; 
+            flex-direction: column;
+            position: absolute;
+            top: 72px; /* Di bawah navbar */
+            right: 0;
+            background: var(--white);
+            width: 70%;
+            height: auto;
+            min-height: 100vh;
+            padding: 20px 0;
+            box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+            transition: 0.3s ease-in-out;
+            transform: translateX(100%); /* Sembunyikan ke kanan */
+        }
+
+        nav ul li {
+            padding: 10px 30px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Kelas untuk menampilkan menu */
+        nav ul.active {
+            display: flex;
+            transform: translateX(0); /* Tampilkan di layar */
+        }
+
+        .hero-title {
+            font-size: 2rem; /* Judul HERO lebih kecil di mobile */
+        }
+    }
+
     /* HERO Section */
 .hero {
     background: linear-gradient(135deg, var(--primary-red) 0%, var(--secondary-red) 100%);
